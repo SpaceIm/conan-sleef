@@ -21,6 +21,8 @@ class SleefConan(ConanFile):
         "fPIC": True,
     }
 
+    short_paths = True
+
     exports_sources = "CMakeLists.txt"
     generators = "cmake"
     _cmake = None
