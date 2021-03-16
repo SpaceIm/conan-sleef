@@ -83,7 +83,7 @@ class SleefConan(ConanFile):
     def package_info(self):
         self.cpp_info.names["pkg_config"] = "sleef"
         self.cpp_info.libs = ["sleef"]
-        if not self.options.shared:
+        if self.settings.os == "Windows" and not self.options.shared:
             self.cpp_info.defines = ["SLEEF_STATIC_LIBS"]
         if self.settings.os == "Linux":
             self.cpp_info.system_libs = ["m"]
