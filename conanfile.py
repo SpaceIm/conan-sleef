@@ -56,7 +56,7 @@ class SleefConan(ConanFile):
         self._cmake.definitions["BUILD_LIBM"] = True
         self._cmake.definitions["BUILD_DFT"] = False
         self._cmake.definitions["BUILD_QUAD"] = False
-        self._cmake.definitions["BUILD_GNUABI_LIBS"] = True
+        self._cmake.definitions["BUILD_GNUABI_LIBS"] = False
         self._cmake.definitions["BUILD_TESTS"] = False
         self._cmake.definitions["BUILD_INLINE_HEADERS"] = False
         self._cmake.definitions["SLEEF_TEST_ALL_IUT"] = False
@@ -83,5 +83,7 @@ class SleefConan(ConanFile):
     def package_info(self):
         self.cpp_info.names["pkg_config"] = "sleef"
         self.cpp_info.libs = ["sleef"]
+        if not self.options.shared:
+            self.cpp_info.defines = ["SLEEF_STATIC_LIBS"]
         if self.settings.os == "Linux":
             self.cpp_info.system_libs = ["m"]
